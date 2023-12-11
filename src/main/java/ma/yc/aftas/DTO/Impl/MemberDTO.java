@@ -18,5 +18,5 @@ public class MemberDTO {
     String familyName;
     Date accessionDate;
     IndentityDocumentType indentityDocumentType;
-    String IndentityNumbe;
+    String IdentityNumber;
 }
