@@ -1,12 +1,12 @@
 package ma.yc.aftas.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @Entity(name = "CompetitionEntity")
 @Table(name = "competitions")
@@ -15,9 +15,33 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompetitionEntity {
-
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "code")
+    private String code;
 
+    @Basic
+    @Column(name = "date")
+    private Date date;
+
+    @Basic
+    @Column(name = "start_time")
+    private Date startTime;
+
+    @Basic
+    @Column(name = "end_time")
+    private Date endTime;
+
+    @Basic
+    @Column(name = "number_of_participants")
+    private Integer numberOfParticipants;
+
+    @Basic
+    @Column(name = "location")
+    private String location;
+
+    @Basic
+    @Column(name = "amount")
+    private Integer amount;
 
 }

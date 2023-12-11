@@ -1,6 +1,6 @@
 package ma.yc.aftas.Enum;
 
-public enum IndentityDocumentType {
+public enum IdentityDocumentType {
     CIN,
     PASSPORT,
     RESIDENCE_PERMIT

@@ -1,8 +1,6 @@
 package ma.yc.aftas.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,7 +14,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class HuntingEntity {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
+
+    @Basic
+    @Column(name = "numberOfFish")
+    private Integer numberOfFish;
 
 
 }

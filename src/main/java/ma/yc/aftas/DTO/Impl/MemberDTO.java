@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.yc.aftas.Enum.IndentityDocumentType;
+import ma.yc.aftas.Enum.IdentityDocumentType;
 
 import java.util.Date;
 
@@ -17,6 +17,6 @@ public class MemberDTO {
     String name;
     String familyName;
     Date accessionDate;
-    IndentityDocumentType indentityDocumentType;
+    IdentityDocumentType identityDocumentType;
     String IdentityNumber;
 }

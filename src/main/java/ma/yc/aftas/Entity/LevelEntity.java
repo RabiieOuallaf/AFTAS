@@ -1,8 +1,6 @@
 package ma.yc.aftas.Entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +14,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LevelEntity {
     @Id
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "code")
+    private Integer code;
 
+    @Basic
+    @Column(name = "description")
+    private String description;
+
+    @Basic
+    @Column(name = "points")
+    private Integer points;
 }
