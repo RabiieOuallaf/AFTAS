@@ -7,6 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import ma.yc.aftas.Enum.IdentityDocumentType;
 
+import java.util.List;
+import java.util.Set;
+
 @Entity(name = "MemberEntity")
 @Table(name = "members")
 @Data
@@ -43,5 +46,16 @@ public class MemberEntity {
     @Column(name = "identityDocumentNumber")
     private String identityDocumentNumber;
 
+    @ManyToMany
+    @JoinTable(
+            name = "Rank",
+            joinColumns = @JoinColumn(name = "memberNum"),
+            inverseJoinColumns = @JoinColumn(name = "competitionCode")
+    )
+
+    private Set<CompetitionEntity> competitions;
+
+    @OneToMany(mappedBy = "member")
+    private List<HuntingEntity> huntings;
 
 }

@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity(name = "CompetitionEntity")
 @Table(name = "competitions")
@@ -44,4 +46,9 @@ public class CompetitionEntity {
     @Column(name = "amount")
     private Integer amount;
 
+    @ManyToMany(mappedBy = "competitions")
+    private Set<MemberEntity> members;
+
+    @OneToMany(mappedBy = "competition")
+    private List<HuntingEntity> huntings;
 }

@@ -7,16 +7,22 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity(name = "RankingEntity")
-@Table(name = "rankings")
+@Table(name = "Rank")
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class RankingEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Integer id;
+    @EmbeddedId
+    private RankEID id;
+
+    @ManyToOne
+    @JoinColumn(name = "memberNum", insertable = false, updatable = false)
+    private MemberEntity member;
+
+    @ManyToOne
+    @JoinColumn(name = "competitionCode", insertable = false, updatable = false)
+    private CompetitionEntity competition;
 
     @Basic
     @Column(name = "rank")

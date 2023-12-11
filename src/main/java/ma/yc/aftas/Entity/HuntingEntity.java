@@ -18,9 +18,23 @@ public class HuntingEntity {
     @Column(name = "id")
     private Integer id;
 
+
+    @ManyToOne
+    @JoinColumn(name = "member_id", referencedColumnName = "num")
+    private MemberEntity member;
+
+
     @Basic
     @Column(name = "numberOfFish")
     private Integer numberOfFish;
+
+    @ManyToOne
+    @JoinColumn(name = "compititon_id", referencedColumnName = "column")
+    private CompetitionEntity competition;
+
+    @ManyToOne
+    @JoinColumn(name = "fish_id", referencedColumnName = "id")
+    private FishEntity fish;
 
 
 }
