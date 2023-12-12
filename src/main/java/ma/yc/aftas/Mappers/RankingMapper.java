@@ -1,4 +1,4 @@
-package ma.yc.aftas.Mapper;
+package ma.yc.aftas.Mappers;
 
 public interface RankingMapper {
 }

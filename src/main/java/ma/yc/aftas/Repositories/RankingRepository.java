@@ -1,4 +1,4 @@
-package ma.yc.aftas.Repository;
+package ma.yc.aftas.Repositories;
 
 import ma.yc.aftas.Entity.RankEID;
 import ma.yc.aftas.Entity.RankingEntity;

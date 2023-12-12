@@ -1,4 +1,4 @@
-package ma.yc.aftas.Service.Interface;
+package ma.yc.aftas.Services.Interface;
 
 public interface CompetitionServiceInterface {
 }

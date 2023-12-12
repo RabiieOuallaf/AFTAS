@@ -1,4 +1,4 @@
-package ma.yc.aftas.Repository;
+package ma.yc.aftas.Repositories;
 
 import ma.yc.aftas.Entity.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

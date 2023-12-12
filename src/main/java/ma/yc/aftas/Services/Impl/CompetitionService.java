@@ -1,4 +1,4 @@
-package ma.yc.aftas.Service.Impl;
+package ma.yc.aftas.Services.Impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -7,5 +7,5 @@ import org.springframework.stereotype.Service;
 @Service
 @Slf4j
 @RequiredArgsConstructor
-public class HuntingService {
+public class CompetitionService {
 }
