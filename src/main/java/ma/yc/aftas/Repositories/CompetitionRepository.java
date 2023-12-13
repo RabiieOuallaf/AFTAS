@@ -11,4 +11,6 @@ import java.util.Optional;
 public interface CompetitionRepository extends JpaRepository<CompetitionEntity, String> {
     Optional<CompetitionEntity> findByCode(String code);
     CompetitionEntity findByDate(LocalDate date);
+
+    void deleteByCode(String code);
 }

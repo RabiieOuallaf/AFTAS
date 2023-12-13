@@ -55,10 +55,19 @@ public class CompetitionService implements CompetitionServiceInterface {
     }
 
     @Override
-    public CompetitionDTO delete(CompetitionDTO competitionDTO) {
-        return null;
+    public boolean delete(String code) {
+        if(getByCode(code) == null){
+            log.info("Competition not found");
+            return false;
+        }
+        competitionRepository.deleteByCode(code);
+        return true;
     }
 
+    /**
+     * @return List<CompetitionDTO>
+     * @description Get all competitions
+     */
     @Override
     public List<CompetitionDTO> getAll() {
         List<CompetitionEntity> listOfCompetitions = competitionRepository.findAll();
@@ -73,16 +82,21 @@ public class CompetitionService implements CompetitionServiceInterface {
         return listOfCompetitionDTOs;
     }
 
+    /**
+     * @param code
+     * @return CompetitionDTO
+     * @description Get a competition by code
+     */
+
     @Override
     public CompetitionDTO getByCode(String code) {
-        return null;
+        return CompetitionMapper.competitionMapper.toDTO(competitionRepository.findByCode(code).get());
     }
 
     /**
      * @param date
      * @return boolean
      * @description Check if the competition date is available
-     * @Endpoint : /api/v1/competition/isCompetitionDateAvailable
      * @RequestBody : LocalDate date
      */
     @Override

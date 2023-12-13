@@ -45,21 +45,62 @@ public class CompetitionController implements CompetitionControllerInterface {
 
     }
 
+    @DeleteMapping("/delete/{code}")
     @Override
-    public ResponseEntity<String> delete(CompetitionDTO competitionDTO) {
-        return null;
+
+    /**
+     * Delete a competition
+     * @param code
+     * @return ResponseEntity<String>
+     * @Endpoint : /api/v1/competition/delete/{code}
+     */
+    public ResponseEntity<String> delete(@PathVariable String code) {
+
+        if(competitionService.delete(code)){
+            return ResponseEntity.ok().body("Competition deleted successfully");
+        }else {
+            return ResponseEntity.badRequest().body("Competition not found");
+        }
     }
 
     @GetMapping("/getAll")
     @Override
+
+    /**
+     * Get all competitions
+     * @return ResponseEntity<List<CompetitionDTO>>
+     * @Endpoint : /api/v1/competition/getAll
+     */
+
     public ResponseEntity<List<CompetitionDTO>> getAll() {
         return ResponseEntity.ok().body(competitionService.getAll());
     }
 
+    @GetMapping("/get/{code}")
     @Override
-    public ResponseEntity<String> getByCode(String code) {
-        return null;
+
+    /**
+     * Get a competition by code
+     * @param code
+     * @return ResponseEntity<String>
+     * @Endpoint : /api/v1/competition/get/{code}
+     */
+
+    public ResponseEntity<String> getByCode(@PathVariable String code) {
+        CompetitionDTO foundCompetitionDTO = competitionService.getByCode(code);
+
+        if(foundCompetitionDTO == null){
+            return ResponseEntity.badRequest().body("Competition not found");
+        }
+        return ResponseEntity.ok().body("Competition found : " + foundCompetitionDTO);
     }
+
+    /**
+     * @param date
+     * @return boolean
+     * @description Check if the competition date is available
+     * @RequestBody : LocalDate date
+     */
 
     @Override
     public String generateCode(LocalDate date, String location) {
