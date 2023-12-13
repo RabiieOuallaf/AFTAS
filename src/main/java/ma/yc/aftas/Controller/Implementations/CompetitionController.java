@@ -84,7 +84,7 @@ public class CompetitionController implements CompetitionControllerInterface {
         CompetitionDTO foundCompetitionDTO = competitionService.getByCode(code);
 
         if(foundCompetitionDTO == null){
-            return ResponseEntity.badRequest().body("Competition not found");
+            return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok().body("Competition found : " + foundCompetitionDTO);
     }

@@ -21,6 +21,7 @@ import java.util.Optional;
 public class CompetitionService implements CompetitionServiceInterface {
     @Autowired
     private CompetitionRepository competitionRepository;
+
     /**
     * @param competitionDTO
     * @return CompetitionDTO
@@ -88,7 +89,13 @@ public class CompetitionService implements CompetitionServiceInterface {
 
     @Override
     public CompetitionDTO getByCode(String code) {
-        return CompetitionMapper.competitionMapper.toDTO(competitionRepository.findByCode(code).get());
+        CompetitionDTO foundCompetitionDTO =  CompetitionMapper.competitionMapper.toDTO(competitionRepository.findByCode(code).get());
+        if(foundCompetitionDTO == null){
+            log.info("Competition not found");
+            return null;
+        }else {
+            return foundCompetitionDTO;
+        }
     }
 
     /**

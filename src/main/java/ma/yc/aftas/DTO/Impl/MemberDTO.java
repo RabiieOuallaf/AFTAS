@@ -17,7 +17,7 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MemberDTO {
-    Integer number;
+    Integer num;
     String name;
     String familyName;
     Date accessionDate;

@@ -18,7 +18,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class MemberEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "num")
     private Integer num;
 
