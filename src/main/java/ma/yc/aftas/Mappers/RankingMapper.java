@@ -12,5 +12,4 @@ public interface RankingMapper {
     RankingDTO toDTO(RankingEntity rankingEntity);
     RankingEntity toEntity(RankingDTO rankingDTO);
 
-
 }

@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ma.yc.aftas.Entity.FishEntity;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -13,4 +16,5 @@ public class LevelDTO {
     Integer level;
     String description;
     Integer points;
+    List<FishEntity> fish;
 }

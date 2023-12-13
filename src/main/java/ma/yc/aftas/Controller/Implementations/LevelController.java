@@ -1,4 +1,4 @@
-package ma.yc.aftas.Controller;
+package ma.yc.aftas.Controller.Implementations;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;

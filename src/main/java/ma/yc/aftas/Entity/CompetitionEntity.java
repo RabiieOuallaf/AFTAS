@@ -1,12 +1,17 @@
 package ma.yc.aftas.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Set;
 
@@ -18,24 +23,27 @@ import java.util.Set;
 @NoArgsConstructor
 public class CompetitionEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "code")
+    @Column(name = "code", columnDefinition = "VARCHAR(255)")
     private String code;
 
     @Basic
     @Column(name = "date")
-    private Date date;
+    private LocalDate date;
 
     @Basic
-    @Column(name = "start_time")
-    private Date startTime;
+    @Column(name = "startTime")
+    @JsonFormat(pattern = "HH:mm:ss")
+
+    private LocalTime startTime;
 
     @Basic
-    @Column(name = "end_time")
-    private Date endTime;
+    @Column(name = "endTime")
+    @JsonFormat(pattern = "HH:mm:ss")
+
+    private LocalTime endTime;
 
     @Basic
-    @Column(name = "number_of_participants")
+    @Column(name = "numberOfParticipants")
     private Integer numberOfParticipants;
 
     @Basic
@@ -50,5 +58,7 @@ public class CompetitionEntity {
     private Set<MemberEntity> members;
 
     @OneToMany(mappedBy = "competition")
-    private List<HuntingEntity> huntings;
+    private List<HuntingEntity> hunting;
+
+
 }

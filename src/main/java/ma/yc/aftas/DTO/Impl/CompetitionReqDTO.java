@@ -5,21 +5,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.yc.aftas.Entity.HuntingEntity;
-import ma.yc.aftas.Entity.MemberEntity;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CompetitionDTO {
+public class CompetitionReqDTO {
     String code;
     LocalDate date;
     @JsonFormat(pattern = "HH:mm:ss")
@@ -29,6 +22,4 @@ public class CompetitionDTO {
     Integer numberOfParticipants;
     String location;
     Integer amount;
-    Set<MemberEntity> members;
-    List<HuntingEntity> hunting;
 }

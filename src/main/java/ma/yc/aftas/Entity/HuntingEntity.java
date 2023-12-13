@@ -29,7 +29,7 @@ public class HuntingEntity {
     private Integer numberOfFish;
 
     @ManyToOne
-    @JoinColumn(name = "compititon_id", referencedColumnName = "column")
+    @JoinColumn(name = "code", referencedColumnName = "code", columnDefinition = "VARCHAR(255)")
     private CompetitionEntity competition;
 
     @ManyToOne
