@@ -9,7 +9,6 @@ import java.util.List;
 @Service
 public interface CompetitionServiceInterface {
     public CompetitionDTO create(CompetitionDTO competitionDTO);
-    public CompetitionDTO update(CompetitionDTO competitionDTO);
     public boolean delete(String code);
     public List<CompetitionDTO> getAll();
     public CompetitionDTO getByCode(String code);

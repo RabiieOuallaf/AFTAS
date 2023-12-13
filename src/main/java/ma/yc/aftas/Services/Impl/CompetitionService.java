@@ -50,17 +50,15 @@ public class CompetitionService implements CompetitionServiceInterface {
     }
 
     @Override
-    public CompetitionDTO update(CompetitionDTO competitionDTO) {
-        return null;
-    }
-
-    @Override
     public boolean delete(String code) {
-        if(getByCode(code) == null){
+        CompetitionDTO competitionToBeDeleted = getByCode(code);
+
+        if(competitionToBeDeleted == null){
             log.info("Competition not found");
             return false;
         }
-        competitionRepository.deleteByCode(code);
+        CompetitionEntity competitionToBeDeletedEntity = CompetitionMapper.competitionMapper.toEntity(competitionToBeDeleted);
+        competitionRepository.delete(competitionToBeDeletedEntity);
         return true;
     }
 

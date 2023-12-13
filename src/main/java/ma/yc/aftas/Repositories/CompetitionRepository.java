@@ -12,5 +12,4 @@ public interface CompetitionRepository extends JpaRepository<CompetitionEntity, 
     Optional<CompetitionEntity> findByCode(String code);
     CompetitionEntity findByDate(LocalDate date);
 
-    void deleteByCode(String code);
 }

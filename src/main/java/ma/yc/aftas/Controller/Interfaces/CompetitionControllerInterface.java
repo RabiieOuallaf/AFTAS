@@ -8,10 +8,9 @@ import java.util.List;
 
 public interface CompetitionControllerInterface {
     public ResponseEntity<String> create(CompetitionDTO competitionDTO);
-    public ResponseEntity<String> update(CompetitionDTO competitionDTO);
     public ResponseEntity<String> delete(String code);
     public ResponseEntity<List<CompetitionDTO>> getAll();
-    public ResponseEntity<String> getByCode(String code);
+    public Object getByCode(String code);
 
     public String generateCode(LocalDate startDate, String location);
 

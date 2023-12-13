@@ -39,12 +39,6 @@ public class CompetitionController implements CompetitionControllerInterface {
 
     }
 
-    @Override
-    public ResponseEntity<String> update(CompetitionDTO competitionDTO) {
-        return null;
-
-    }
-
     @DeleteMapping("/delete/{code}")
     @Override
 
