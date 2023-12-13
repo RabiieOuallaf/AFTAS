@@ -6,12 +6,10 @@ import ma.yc.aftas.DTO.Impl.CompetitionDTO;
 import ma.yc.aftas.Services.Impl.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -33,8 +31,11 @@ public class CompetitionController implements CompetitionControllerInterface {
             return ResponseEntity.badRequest().body("Invalid request");
         }
         competitionDTO.setCode(generateCode(competitionDTO.getDate(), competitionDTO.getLocation()));
-
-        return ResponseEntity.ok().body("Created competition : " + competitionService.create(competitionDTO));
+        CompetitionDTO createdCompetitionDTO = competitionService.create(competitionDTO);
+        if(createdCompetitionDTO == null){
+            return ResponseEntity.badRequest().body("Competition can't be created check the logs");
+        }
+        return ResponseEntity.ok().body("Created competition object :" + createdCompetitionDTO);
 
     }
 
@@ -49,9 +50,10 @@ public class CompetitionController implements CompetitionControllerInterface {
         return null;
     }
 
+    @GetMapping("/getAll")
     @Override
-    public ResponseEntity<String> getAll() {
-        return null;
+    public ResponseEntity<List<CompetitionDTO>> getAll() {
+        return ResponseEntity.ok().body(competitionService.getAll());
     }
 
     @Override
@@ -71,5 +73,8 @@ public class CompetitionController implements CompetitionControllerInterface {
 
         return locationCode + "-" + dateCode;
     }
+
+
+
 
 }

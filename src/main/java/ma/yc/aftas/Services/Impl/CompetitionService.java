@@ -1,7 +1,6 @@
 package ma.yc.aftas.Services.Impl;
 
 import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.yc.aftas.DTO.Impl.CompetitionDTO;
 import ma.yc.aftas.Entity.CompetitionEntity;
@@ -11,6 +10,9 @@ import ma.yc.aftas.Services.Interface.CompetitionServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -32,15 +34,16 @@ public class CompetitionService implements CompetitionServiceInterface {
             log.info("Competition already exists");
             return null;
         }
-        System.out.print("CompetitionDTO from service ----->: "+competitionDTO);
+        if(!isCompetitionDateAvailable(competitionDTO.getDate())){
+            log.info("Competition date is not available");
+            return null;
+        }
         CompetitionEntity toBeCreatedCompetitionEntity = CompetitionMapper.competitionMapper.toEntity(competitionDTO);
-        System.out.print("CompetitionDTO to be created from service ----->: "+toBeCreatedCompetitionEntity);
 
         CompetitionEntity createdCompetitionEntity = competitionRepository.save(toBeCreatedCompetitionEntity);
-        System.out.print("CompetitionDTO created from service ----->: "+createdCompetitionEntity);
 
         if(createdCompetitionEntity == null){
-            log.info("Competition not created");
+            log.info("Competition can't be inserted to the DB");
             return null;
         }
         return CompetitionMapper.competitionMapper.toDTO(createdCompetitionEntity);
@@ -57,8 +60,17 @@ public class CompetitionService implements CompetitionServiceInterface {
     }
 
     @Override
-    public CompetitionDTO getAll() {
-        return null;
+    public List<CompetitionDTO> getAll() {
+        List<CompetitionEntity> listOfCompetitions = competitionRepository.findAll();
+        List<CompetitionDTO> listOfCompetitionDTOs = new ArrayList<>();
+        if(listOfCompetitions == null){
+            log.info("No competitions found");
+            return null;
+        }
+        listOfCompetitions.forEach(competitionEntity -> {
+            listOfCompetitionDTOs.add(CompetitionMapper.competitionMapper.toDTO(competitionEntity));
+        });
+        return listOfCompetitionDTOs;
     }
 
     @Override
@@ -66,9 +78,27 @@ public class CompetitionService implements CompetitionServiceInterface {
         return null;
     }
 
+    /**
+     * @param date
+     * @return boolean
+     * @description Check if the competition date is available
+     * @Endpoint : /api/v1/competition/isCompetitionDateAvailable
+     * @RequestBody : LocalDate date
+     */
     @Override
-    public boolean isCompetitionDateValid(CompetitionDTO competitionDTO) {
-        return false;
+    public boolean isCompetitionDateAvailable(LocalDate date) {
+
+        CompetitionEntity foundCompetitionEntity = competitionRepository.findByDate(date);
+        if(foundCompetitionEntity == null){
+            return true;
+        }else {
+            log.warn("====================================================");
+            log.warn("You can't create a competition withing 24H. please pick a date after " + date);
+            log.warn("====================================================");
+
+            return false;
+        }
+
     }
 
 
