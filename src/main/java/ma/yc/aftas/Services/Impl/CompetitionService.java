@@ -2,10 +2,10 @@ package ma.yc.aftas.Services.Impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import ma.yc.aftas.DTO.Impl.CompetitionDTO;
-import ma.yc.aftas.Entity.CompetitionEntity;
+import ma.yc.aftas.Models.DTO.Impl.CompetitionDTO;
+import ma.yc.aftas.Models.Entity.CompetitionEntity;
 import ma.yc.aftas.Mappers.CompetitionMapper;
-import ma.yc.aftas.Repositories.CompetitionRepository;
+import ma.yc.aftas.Models.Repositories.CompetitionRepository;
 import ma.yc.aftas.Services.Interface.CompetitionServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,9 +23,11 @@ public class CompetitionService implements CompetitionServiceInterface {
     private CompetitionRepository competitionRepository;
 
     /**
+    *
     * @param competitionDTO
     * @return CompetitionDTO
     * @description Create a competition
+    *
      */
     @Override
     public CompetitionDTO create(CompetitionDTO competitionDTO) {
@@ -50,6 +52,14 @@ public class CompetitionService implements CompetitionServiceInterface {
         return CompetitionMapper.competitionMapper.toDTO(createdCompetitionEntity);
     }
 
+    /**
+     *
+     * @param code
+     * @return boolean
+     * @description Delete a competition
+     *
+     */
+
     @Override
     public boolean delete(String code) {
         CompetitionDTO competitionToBeDeleted = getByCode(code);
@@ -64,8 +74,10 @@ public class CompetitionService implements CompetitionServiceInterface {
     }
 
     /**
+     *
      * @return List<CompetitionDTO>
      * @description Get all competitions
+     *
      */
     @Override
     public List<CompetitionDTO> getAll() {

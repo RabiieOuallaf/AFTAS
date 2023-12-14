@@ -1,6 +1,6 @@
 package ma.yc.aftas.Services.Interface;
 
-import ma.yc.aftas.DTO.Impl.CompetitionDTO;
+import ma.yc.aftas.Models.DTO.Impl.CompetitionDTO;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;

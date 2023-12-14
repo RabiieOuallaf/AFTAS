@@ -1,11 +1,11 @@
-package ma.yc.aftas.DTO.Impl;
+package ma.yc.aftas.Models.DTO.Impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.yc.aftas.Entity.CompetitionEntity;
-import ma.yc.aftas.Entity.HuntingEntity;
+import ma.yc.aftas.Models.Entity.CompetitionEntity;
+import ma.yc.aftas.Models.Entity.HuntingEntity;
 import ma.yc.aftas.Enum.IdentityDocumentType;
 
 import java.util.Date;

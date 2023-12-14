@@ -1,4 +1,4 @@
-package ma.yc.aftas.Entity;
+package ma.yc.aftas.Models.Entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

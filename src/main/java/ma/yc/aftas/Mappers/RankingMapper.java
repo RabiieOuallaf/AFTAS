@@ -1,7 +1,7 @@
 package ma.yc.aftas.Mappers;
 
-import ma.yc.aftas.DTO.Impl.RankingDTO;
-import ma.yc.aftas.Entity.RankingEntity;
+import ma.yc.aftas.Models.DTO.Impl.RankingDTO;
+import ma.yc.aftas.Models.Entity.RankingEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

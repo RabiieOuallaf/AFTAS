@@ -1,6 +1,6 @@
 package ma.yc.aftas.Controller.Interfaces;
 
-import ma.yc.aftas.DTO.Impl.CompetitionDTO;
+import ma.yc.aftas.Models.DTO.Impl.CompetitionDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.time.LocalDate;

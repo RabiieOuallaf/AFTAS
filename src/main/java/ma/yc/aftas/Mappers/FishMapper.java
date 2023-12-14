@@ -1,7 +1,7 @@
 package ma.yc.aftas.Mappers;
 
-import ma.yc.aftas.DTO.Impl.FishDTO;
-import ma.yc.aftas.Entity.FishEntity;
+import ma.yc.aftas.Models.DTO.Impl.FishDTO;
+import ma.yc.aftas.Models.Entity.FishEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

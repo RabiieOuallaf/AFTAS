@@ -1,7 +1,7 @@
 package ma.yc.aftas.Mappers;
 
-import ma.yc.aftas.DTO.Impl.CompetitionDTO;
-import ma.yc.aftas.Entity.CompetitionEntity;
+import ma.yc.aftas.Models.DTO.Impl.CompetitionDTO;
+import ma.yc.aftas.Models.Entity.CompetitionEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

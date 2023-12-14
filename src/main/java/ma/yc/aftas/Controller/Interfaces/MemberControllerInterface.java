@@ -1,6 +1,6 @@
 package ma.yc.aftas.Controller.Interfaces;
 
-import ma.yc.aftas.DTO.Impl.MemberDTO;
+import ma.yc.aftas.Models.DTO.Impl.MemberDTO;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;

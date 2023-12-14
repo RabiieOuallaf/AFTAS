@@ -1,17 +1,15 @@
-package ma.yc.aftas.DTO.Impl;
+package ma.yc.aftas.Models.DTO.Impl;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.yc.aftas.Entity.HuntingEntity;
-import ma.yc.aftas.Entity.MemberEntity;
+import ma.yc.aftas.Models.Entity.HuntingEntity;
+import ma.yc.aftas.Models.Entity.MemberEntity;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.List;
 import java.util.Set;
 

@@ -1,7 +1,7 @@
 package ma.yc.aftas.Mappers;
 
-import ma.yc.aftas.DTO.Impl.MemberDTO;
-import ma.yc.aftas.Entity.MemberEntity;
+import ma.yc.aftas.Models.DTO.Impl.MemberDTO;
+import ma.yc.aftas.Models.Entity.MemberEntity;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

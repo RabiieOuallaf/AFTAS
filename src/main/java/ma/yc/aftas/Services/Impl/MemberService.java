@@ -2,12 +2,10 @@ package ma.yc.aftas.Services.Impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import ma.yc.aftas.DTO.Impl.MemberDTO;
-import ma.yc.aftas.Entity.CompetitionEntity;
-import ma.yc.aftas.Entity.MemberEntity;
-import ma.yc.aftas.Mappers.CompetitionMapper;
+import ma.yc.aftas.Models.DTO.Impl.MemberDTO;
+import ma.yc.aftas.Models.Entity.MemberEntity;
 import ma.yc.aftas.Mappers.MemberMapper;
-import ma.yc.aftas.Repositories.MemberRepository;
+import ma.yc.aftas.Models.Repositories.MemberRepository;
 import ma.yc.aftas.Services.Interface.MemberServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

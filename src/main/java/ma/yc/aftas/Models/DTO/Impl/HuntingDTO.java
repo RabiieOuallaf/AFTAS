@@ -1,4 +1,4 @@
-package ma.yc.aftas.DTO.Impl;
+package ma.yc.aftas.Models.DTO.Impl;
 
 public class HuntingDTO {
     Integer id;

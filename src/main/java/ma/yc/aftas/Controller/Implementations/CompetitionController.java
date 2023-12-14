@@ -2,7 +2,7 @@ package ma.yc.aftas.Controller.Implementations;
 
 import lombok.RequiredArgsConstructor;
 import ma.yc.aftas.Controller.Interfaces.CompetitionControllerInterface;
-import ma.yc.aftas.DTO.Impl.CompetitionDTO;
+import ma.yc.aftas.Models.DTO.Impl.CompetitionDTO;
 import ma.yc.aftas.Services.Impl.CompetitionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

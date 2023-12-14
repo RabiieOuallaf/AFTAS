@@ -1,13 +1,13 @@
-package ma.yc.aftas.DTO.Impl;
+package ma.yc.aftas.Models.DTO.Impl;
 
 import jakarta.persistence.EmbeddedId;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.yc.aftas.Entity.CompetitionEntity;
-import ma.yc.aftas.Entity.MemberEntity;
-import ma.yc.aftas.Entity.RankEID;
+import ma.yc.aftas.Models.Entity.CompetitionEntity;
+import ma.yc.aftas.Models.Entity.MemberEntity;
+import ma.yc.aftas.Models.Entity.RankEID;
 
 @Data
 @Builder

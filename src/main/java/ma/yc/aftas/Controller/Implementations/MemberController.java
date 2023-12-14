@@ -3,7 +3,7 @@ package ma.yc.aftas.Controller.Implementations;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.yc.aftas.Controller.Interfaces.MemberControllerInterface;
-import ma.yc.aftas.DTO.Impl.MemberDTO;
+import ma.yc.aftas.Models.DTO.Impl.MemberDTO;
 import ma.yc.aftas.Services.Impl.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,15 +18,19 @@ import java.util.List;
 public class MemberController implements MemberControllerInterface {
     @Autowired
     private MemberService memberService;
+
     /**
+     *
      * @param memberDTO
      * @return ResponseEntity<String>
      * @description Create a member
      * @Endpoint: POST /api/v1/member/create
+     *
      */
+
     @PostMapping("/create")
+    @Override
     public ResponseEntity<String> create(@RequestBody MemberDTO memberDTO) {
-        System.out.println(memberDTO + "<------------------- i received this well :) ");
         if(memberDTO == null){
             return ResponseEntity.badRequest().body("Invalid request");
         }
@@ -35,7 +39,6 @@ public class MemberController implements MemberControllerInterface {
             log.info("Member already exists");
             return ResponseEntity.badRequest().body("Member already exists");
         }
-        System.out.println(memberDTO + "<------------------- i received this");
         MemberDTO createdMemberDTO = memberService.create(memberDTO);
         if(createdMemberDTO == null){
             return ResponseEntity.badRequest().body("Member can't be created check the logs");
@@ -44,12 +47,16 @@ public class MemberController implements MemberControllerInterface {
     }
 
     /**
+     *
      * @param memberDTO
      * @return ResponseEntity<String>
      * @description Update a member
      * @Endpoint: POST /api/v1/member/update
+     *
      */
+
     @PutMapping("/update")
+    @Override
     public ResponseEntity<String> update(@RequestBody MemberDTO memberDTO) {
         if(memberDTO == null){
             return ResponseEntity.badRequest().body("Invalid request");
@@ -60,12 +67,16 @@ public class MemberController implements MemberControllerInterface {
         }
         return ResponseEntity.ok().body("Updated member object :" + updatedMemberDTO);
     }
+
     /**
+     *
      * @param num
      * @return ResponseEntity<String>
      * @description Delete a member
      * @Endpoint: DELETE /api/v1/member/delete/{num}
+     *
      */
+
     @DeleteMapping("/delete/{num}")
     @Override
     public ResponseEntity<String> delete(@PathVariable Integer num) {
@@ -77,10 +88,13 @@ public class MemberController implements MemberControllerInterface {
     }
 
     /**
+     *
      * @return ResponseEntity<List<MemberDTO>>
      * @description Get all members
      * @Endpoint: GET /api/v1/member/getAll
+     *
      */
+
     @GetMapping("/getAll")
     @Override
     public ResponseEntity<List<MemberDTO>> getAll() {
@@ -88,9 +102,12 @@ public class MemberController implements MemberControllerInterface {
     }
 
     /**
+     *
      * @param num
      * @return ResponseEntity<MemberDTO>
      * @description Get a member by num
+     * @Endpoint GET /api/v1/get/{num}
+     *
      */
 
     @GetMapping("/get/{num}")

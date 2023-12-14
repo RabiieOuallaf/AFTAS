@@ -1,10 +1,10 @@
-package ma.yc.aftas.DTO.Impl;
+package ma.yc.aftas.Models.DTO.Impl;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ma.yc.aftas.Entity.FishEntity;
+import ma.yc.aftas.Models.Entity.FishEntity;
 
 import java.util.List;
 
