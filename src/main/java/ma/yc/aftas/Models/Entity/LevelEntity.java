@@ -16,7 +16,6 @@ import java.util.List;
 @NoArgsConstructor
 public class LevelEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "level")
     private Integer level;
 

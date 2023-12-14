@@ -7,9 +7,7 @@ import ma.yc.aftas.Models.Entity.LevelEntity;
 import ma.yc.aftas.Services.Impl.LevelService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class LevelController implements LevelControllerInterface {
      */
     @PostMapping("/create")
     @Override
-    public ResponseEntity<String> create(LevelDTO levelDTO) {
+    public ResponseEntity<String> create(@RequestBody LevelDTO levelDTO) {
         if(levelDTO == null) {
             return ResponseEntity.badRequest().body("Invalid request");
         }
@@ -46,9 +44,9 @@ public class LevelController implements LevelControllerInterface {
      * @return ResponseEntity<String>
      * @Endpoint : /api/v1/level/delete/{level}
      */
-    @PostMapping("/delete/{level}")
+    @DeleteMapping("/delete/{level}")
     @Override
-    public ResponseEntity<String> delete(Integer level) {
+    public ResponseEntity<String> delete(@PathVariable Integer level) {
         if(level == 0) {
             return ResponseEntity.badRequest().body("Invalid request");
         }
@@ -63,7 +61,7 @@ public class LevelController implements LevelControllerInterface {
      * @return ResponseEntity<List<LevelDTO>>
      * @Endpoint : /api/v1/level/getAll
      */
-    @PostMapping("/getAll")
+    @GetMapping("/getAll")
     @Override
     public ResponseEntity<List<LevelDTO>> getAll() {
         List<LevelDTO> levelDTOS = levelService.getAll();
@@ -76,9 +74,9 @@ public class LevelController implements LevelControllerInterface {
      * @return ResponseEntity<LevelDTO>
      * @Endpoint : /api/v1/level/get/{level}
      */
-    @PostMapping("/get/{level}")
+    @GetMapping("/get/{level}")
     @Override
-    public ResponseEntity<LevelDTO> get(Integer level) {
+    public ResponseEntity<LevelDTO> get(@PathVariable Integer level) {
         LevelDTO levelEntity = levelService.get(level);
         return ResponseEntity.ok().body(levelEntity);
     }
