@@ -33,7 +33,7 @@ public class FishEntity {
     private List<HuntingEntity> huntings;
 
     @ManyToOne
-    @JoinColumn(name = "level_id", referencedColumnName = "code")
+    @JoinColumn(name = "level_id", referencedColumnName = "level")
     private LevelEntity level;
 
 }

@@ -17,8 +17,8 @@ import java.util.List;
 public class LevelEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "code")
-    private Integer code;
+    @Column(name = "level")
+    private Integer level;
 
     @Basic
     @Column(name = "description")
