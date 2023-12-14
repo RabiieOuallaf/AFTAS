@@ -10,8 +10,8 @@ import ma.yc.aftas.Models.Entity.LevelEntity;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class FishDTO {
+public class FishReqDTO {
     String name;
     Float averageWeight;
-    LevelEntity level;
+    Integer level;
 }

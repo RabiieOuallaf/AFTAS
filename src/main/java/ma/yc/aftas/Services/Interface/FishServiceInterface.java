@@ -1,12 +1,13 @@
 package ma.yc.aftas.Services.Interface;
 
 import ma.yc.aftas.Models.DTO.Impl.FishDTO;
+import ma.yc.aftas.Models.DTO.Impl.FishReqDTO;
 
 import java.util.List;
 
 public interface FishServiceInterface {
-    public FishDTO create(FishDTO fishDTO);
-    public boolean deleteFish(String name);
-    public FishDTO getFish(String name);
-    public List<FishDTO> getAll();
+    FishDTO create(FishReqDTO fishReqDTO);
+    boolean deleteFish(String name);
+    FishDTO getFish(String name);
+    List<FishDTO> getAll();
 }

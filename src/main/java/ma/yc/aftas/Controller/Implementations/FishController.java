@@ -3,13 +3,11 @@ package ma.yc.aftas.Controller.Implementations;
 import lombok.RequiredArgsConstructor;
 import ma.yc.aftas.Controller.Interfaces.FishControllerInterface;
 import ma.yc.aftas.Models.DTO.Impl.FishDTO;
+import ma.yc.aftas.Models.DTO.Impl.FishReqDTO;
 import ma.yc.aftas.Services.Impl.FishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,7 +27,7 @@ public class FishController implements FishControllerInterface {
 
     @PostMapping("/create")
     @Override
-    public ResponseEntity<String> create(FishDTO fishDTO) {
+    public ResponseEntity<String> create(@RequestBody FishReqDTO fishDTO) {
         if(fishDTO == null){
             return ResponseEntity.badRequest().body("Invalid request");
         }
@@ -49,9 +47,9 @@ public class FishController implements FishControllerInterface {
      *
      */
 
-    @PostMapping("/delete/{name}")
+    @DeleteMapping("/delete/{name}")
     @Override
-    public ResponseEntity<String> delete(String name) {
+    public ResponseEntity<String> delete(@PathVariable String name) {
         if(name.isEmpty()){
             return ResponseEntity.badRequest().body("Invalid request");
         }
@@ -71,7 +69,7 @@ public class FishController implements FishControllerInterface {
      */
     @GetMapping("/get/{name}")
     @Override
-    public ResponseEntity<FishDTO> get(String name) {
+    public ResponseEntity<FishDTO> get(@PathVariable String name) {
         if(name.isEmpty()){
             return ResponseEntity.notFound().build();
         }

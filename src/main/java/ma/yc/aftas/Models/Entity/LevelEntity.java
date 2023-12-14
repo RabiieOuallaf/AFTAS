@@ -1,5 +1,6 @@
 package ma.yc.aftas.Models.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class LevelEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "level")
     private Integer level;
 
@@ -27,6 +29,7 @@ public class LevelEntity {
     @Column(name = "points")
     private Integer points;
 
-    @OneToMany(mappedBy = "level")
+    @OneToMany(mappedBy = "level", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<FishEntity> fish;
 }

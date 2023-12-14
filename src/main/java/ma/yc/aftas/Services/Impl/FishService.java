@@ -3,8 +3,12 @@ package ma.yc.aftas.Services.Impl;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.yc.aftas.Mappers.FishMapper;
+import ma.yc.aftas.Mappers.LevelMapper;
 import ma.yc.aftas.Models.DTO.Impl.FishDTO;
+import ma.yc.aftas.Models.DTO.Impl.FishReqDTO;
+import ma.yc.aftas.Models.DTO.Impl.LevelDTO;
 import ma.yc.aftas.Models.Entity.FishEntity;
+import ma.yc.aftas.Models.Entity.LevelEntity;
 import ma.yc.aftas.Models.Repositories.FishRepository;
 import ma.yc.aftas.Services.Interface.FishServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +23,29 @@ import java.util.List;
 public class FishService implements FishServiceInterface {
     @Autowired
     private final FishRepository fishRepository;
+    private final LevelService levelService;
 
+    /**
+     *
+     * @param fishReqDTO
+     * @return
+     */
     @Override
-    public FishDTO create(FishDTO fishDTO) {
-        FishEntity fishEntity = fishRepository.findByName(fishDTO.getName());
-
+    public FishDTO create(FishReqDTO fishReqDTO) {
+        FishEntity fishEntity = fishRepository.findByName(fishReqDTO.getName());
         if(fishEntity != null){
             log.info("Fish already exists");
             return null;
         }
+        FishDTO fishDTO = new FishDTO();
+        System.out.println(fishReqDTO.getLevel() + "<=============================== LEVEL");
+        LevelDTO levelDTO = levelService.get(fishReqDTO.getLevel());
+        LevelEntity levelEntity = LevelMapper.levelMapper.toEntity(levelDTO);
+
+        fishDTO.setName(fishReqDTO.getName());
+        fishDTO.setAverageWeight(fishReqDTO.getAverageWeight());
+        fishDTO.setLevel(levelEntity);
+
         FishEntity toBeCreatedFishEntity = FishMapper.fishMapper.toEntity(fishDTO);
 
         FishEntity createdFishEntity = fishRepository.save(toBeCreatedFishEntity);
