@@ -220,4 +220,27 @@ public class HuntingService implements HuntingServiceInterface {
         return HuntingMapper.huntingMapper.toDTO(foundHuntingEntity);
     }
 
+    /**
+     *
+     * @param hunting_id
+     * @return Integer
+     * @description Calculate score
+     */
+    @Override
+    public Integer calculateScore(Integer hunting_id) {
+        HuntingEntity huntingEntity = huntingRepository.findById(hunting_id).orElse(null);
+        if(huntingEntity == null){
+            log.info("Hunting not found");
+            return null;
+        }
+        Integer score = huntingEntity.getFish().getLevel().getPoints() * huntingEntity.getNumberOfFish();
+        return score;
+    }
+
+    @Override
+    public RankingDTO setRanking(Integer hunting_id) {
+        return null;
+    }
+
+
 }

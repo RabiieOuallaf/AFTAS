@@ -20,12 +20,11 @@ public class LevelService implements LevelServiceInterface {
     @Autowired
     private LevelRepository levelRepository;
     /**
-     * Create a new level
+     * @Desciptipn Create a new level
      * @param levelDTO
      * @return LevelDTO
      *
      */
-
     @Override
     public LevelDTO create(LevelDTO levelDTO) {
         LevelEntity levelEntity = levelRepository.findByLevel(levelDTO.getLevel());

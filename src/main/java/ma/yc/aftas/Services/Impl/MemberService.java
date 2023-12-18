@@ -47,6 +47,12 @@ public class MemberService implements MemberServiceInterface {
 
     }
 
+    /**
+     * @description Update a member
+     * @param memberDTO
+     * @return MemberDTO
+     */
+
     @Override
     public MemberDTO update(MemberDTO memberDTO) {
         MemberEntity foundMemberEntity = memberRepository.findByNum(memberDTO.getNum());
@@ -67,6 +73,11 @@ public class MemberService implements MemberServiceInterface {
         return MemberMapper.memberMapper.toDTO(createdMember);
     }
 
+    /**
+     * @description Delete a member
+     * @param num
+     * @return boolean
+     */
     @Override
     public boolean delete(Integer num) {
         MemberDTO memberToBeDeleted = getByNum(num);
@@ -79,6 +90,11 @@ public class MemberService implements MemberServiceInterface {
         memberRepository.delete(memberToBeDeletedEntity);
         return true;
     }
+
+    /**
+     * @description Get all members
+     * @return List<MemberDTO>
+     */
 
     @Override
     public List<MemberDTO> getAll() {
@@ -96,6 +112,12 @@ public class MemberService implements MemberServiceInterface {
 
         return listOfMemberDTOs;
     }
+
+    /**
+     * @description Get a member
+     * @param num
+     * @return num
+     */
 
     @Override
     public MemberDTO getByNum(Integer num) {
