@@ -1,6 +1,7 @@
 package ma.yc.aftas.Models.Entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -56,6 +57,7 @@ public class CompetitionEntity {
     private Set<MemberEntity> members;
 
     @OneToMany(mappedBy = "competition")
+    @JsonIgnore
     private List<HuntingEntity> hunting;
 
 

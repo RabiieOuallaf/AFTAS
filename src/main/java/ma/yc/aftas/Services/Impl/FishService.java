@@ -30,6 +30,7 @@ public class FishService implements FishServiceInterface {
      * @param fishReqDTO
      * @return
      */
+
     @Override
     public FishDTO create(FishReqDTO fishReqDTO) {
         FishEntity fishEntity = fishRepository.findByName(fishReqDTO.getName());
@@ -38,7 +39,6 @@ public class FishService implements FishServiceInterface {
             return null;
         }
         FishDTO fishDTO = new FishDTO();
-        System.out.println(fishReqDTO.getLevel() + "<=============================== LEVEL");
         LevelDTO levelDTO = levelService.get(fishReqDTO.getLevel());
         LevelEntity levelEntity = LevelMapper.levelMapper.toEntity(levelDTO);
 
@@ -71,8 +71,17 @@ public class FishService implements FishServiceInterface {
     }
 
     @Override
-    public FishDTO getFish(String name) {
+    public FishDTO get(String name) {
         FishEntity fishEntity = fishRepository.findByName(name);
+
+        if(fishEntity == null){
+            log.info("Fish not found");
+            return null;
+        }
+        return FishMapper.fishMapper.toDTO(fishEntity);
+    }
+    public FishDTO get(Integer id) {
+        FishEntity fishEntity = fishRepository.findById(id).orElse(null);
 
         if(fishEntity == null){
             log.info("Fish not found");

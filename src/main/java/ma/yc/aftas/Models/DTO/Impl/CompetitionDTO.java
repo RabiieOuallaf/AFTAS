@@ -27,6 +27,4 @@ public class CompetitionDTO {
     Integer numberOfParticipants;
     String location;
     Integer amount;
-    Set<MemberEntity> members;
-    List<HuntingEntity> hunting;
 }

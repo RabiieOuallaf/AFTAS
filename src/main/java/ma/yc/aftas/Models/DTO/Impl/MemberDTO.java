@@ -1,5 +1,6 @@
 package ma.yc.aftas.Models.DTO.Impl;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -22,8 +23,5 @@ public class MemberDTO {
     String familyName;
     Date accessionDate;
     IdentityDocumentType identityDocumentType;
-    String IdentityNumber;
-    Set<CompetitionEntity> competitions;
-    List<HuntingEntity> huntings;
-
+    String identityDocumentNumber;
 }

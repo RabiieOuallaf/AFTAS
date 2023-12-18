@@ -16,5 +16,4 @@ public class LevelDTO {
     Integer level;
     String description;
     Integer points;
-    List<FishEntity> fish;
 }

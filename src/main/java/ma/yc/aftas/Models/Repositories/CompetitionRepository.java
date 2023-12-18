@@ -12,4 +12,5 @@ public interface CompetitionRepository extends JpaRepository<CompetitionEntity, 
     Optional<CompetitionEntity> findByCode(String code);
     CompetitionEntity findByDate(LocalDate date);
 
+    CompetitionEntity findAllByCode(String competitionCode);
 }

@@ -1,5 +1,6 @@
 package ma.yc.aftas.Models.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,6 +31,7 @@ public class FishEntity {
     private Float averageWeight;
 
     @OneToMany(mappedBy = "fish")
+    @JsonIgnore
     private List<HuntingEntity> huntings;
 
     @ManyToOne

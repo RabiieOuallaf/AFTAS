@@ -8,6 +8,6 @@ import java.util.List;
 public interface FishServiceInterface {
     FishDTO create(FishReqDTO fishReqDTO);
     boolean deleteFish(String name);
-    FishDTO getFish(String name);
+    FishDTO get(String name);
     List<FishDTO> getAll();
 }

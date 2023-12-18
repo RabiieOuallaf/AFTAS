@@ -73,7 +73,7 @@ public class FishController implements FishControllerInterface {
         if(name.isEmpty()){
             return ResponseEntity.notFound().build();
         }
-        FishDTO fishDTO = fishService.getFish(name);
+        FishDTO fishDTO = fishService.get(name);
         if(fishDTO == null){
             return ResponseEntity.badRequest().body(null);
         }
