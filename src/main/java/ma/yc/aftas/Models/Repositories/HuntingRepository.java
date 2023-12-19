@@ -14,4 +14,6 @@ public interface HuntingRepository extends JpaRepository<HuntingEntity,Integer> 
     List<HuntingEntity> findAllByMember(MemberEntity memberEntity);
 
     List<HuntingEntity> findAllByCompetition(CompetitionEntity competitionEntity);
+
+    List<HuntingEntity> findByCompetitionCodeAndFishIdAndMemberNum(String competitionCode, Integer fishId, Integer memberId);
 }

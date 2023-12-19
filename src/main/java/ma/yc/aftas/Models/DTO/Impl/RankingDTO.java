@@ -19,7 +19,6 @@ public class RankingDTO {
 
     MemberEntity member;
     CompetitionEntity competition;
-
     Integer rank;
     Integer score;
 }

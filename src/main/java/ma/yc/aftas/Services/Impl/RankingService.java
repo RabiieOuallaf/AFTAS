@@ -4,14 +4,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import ma.yc.aftas.Mappers.RankingMapper;
 import ma.yc.aftas.Models.DTO.Impl.RankingDTO;
+import ma.yc.aftas.Models.Entity.RankEID;
 import ma.yc.aftas.Models.Entity.RankingEntity;
-import ma.yc.aftas.Models.Repositories.HuntingRepository;
 import ma.yc.aftas.Models.Repositories.RankingRepository;
 import ma.yc.aftas.Services.Interface.RankingServiceInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Service
@@ -32,13 +33,16 @@ public class RankingService implements RankingServiceInterface {
      */
     @Override
     public RankingDTO create(RankingDTO rankingDTO) {
-        RankingEntity foundRankingEntity = rankingRepository.findByCompetitionCodeAndMemberNum(rankingDTO.getCompetition().getCode() , rankingDTO.getMember().getNum());
 
-        if(foundRankingEntity != null){
-            log.info("Ranking already exists ! try to updated using the following endpoint : /ranking/update");
-            return null;
-        }
         RankingEntity toBeCreatedRankingEntity = RankingMapper.rankingMapper.toEntity(rankingDTO);
+
+        RankEID rankEID = new RankEID();
+        rankEID.setMemberNum(toBeCreatedRankingEntity.getMember().getNum());
+        rankEID.setCompetitionCode(toBeCreatedRankingEntity.getCompetition().getCode());
+
+        // Set the composite key in the entity
+        toBeCreatedRankingEntity.setId(rankEID);
+
         RankingEntity createdRankingEntity = rankingRepository.save(toBeCreatedRankingEntity);
 
        if(createdRankingEntity == null){
@@ -174,6 +178,28 @@ public class RankingService implements RankingServiceInterface {
             rankingDTOS.add(RankingMapper.rankingMapper.toDTO(rankingEntity));
         });
         return rankingDTOS;
+    }
+
+    /**
+     * @Description get sorted ranking by competition (DESC order)
+     * @param competition_code
+     * @return
+     */
+    @Override
+    public List<RankingDTO> getAndSortRankingByCompetition(String competition_code) {
+        List<RankingDTO> foundRankingDTOS = getAllByCompetitionCode(competition_code);
+        if(foundRankingDTOS.isEmpty()) {
+            log.info("There's no ranking under the given competition code");
+            return null;
+        }
+        foundRankingDTOS.sort(Comparator.comparing(RankingDTO::getScore).reversed());
+
+        for(int i = 0; i < foundRankingDTOS.size(); i++) {
+            foundRankingDTOS.get(i).setRank(i+1);
+            update(foundRankingDTOS.get(i));
+        }
+
+        return foundRankingDTOS;
     }
 
 

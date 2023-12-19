@@ -29,6 +29,7 @@ public class HuntingService implements HuntingServiceInterface {
     private final MemberRepository memberRepository;
     private final CompetitionRepository competitionRepository;
     private final FishRepository fishRepository;
+    private final RankingService rankingService;
 
     /**
      *
@@ -56,14 +57,36 @@ public class HuntingService implements HuntingServiceInterface {
             log.info("Competition doesn't exist");
             return null;
         }
+
+        List<HuntingEntity> foundHuntingEntity = huntingRepository.findByCompetitionCodeAndFishIdAndMemberNum(huntingDTO.getCompetition_code(), huntingDTO.getFish_id(), huntingDTO.getMember_id());
         HuntingEntity toBeCreatedHuntingEntity = new HuntingEntity();
-        toBeCreatedHuntingEntity.setId(huntingDTO.getId());
-        toBeCreatedHuntingEntity.setMember(memberEntity);
-        toBeCreatedHuntingEntity.setFish(fishEntity);
-        toBeCreatedHuntingEntity.setCompetition(competitionEntity);
-        toBeCreatedHuntingEntity.setNumberOfFish(huntingDTO.getNumberOfFish());
+        if (foundHuntingEntity.isEmpty()) {
+            // No existing records found, create a new one
+            toBeCreatedHuntingEntity.setId(huntingDTO.getId());
+            toBeCreatedHuntingEntity.setMember(memberEntity);
+            toBeCreatedHuntingEntity.setFish(fishEntity);
+            toBeCreatedHuntingEntity.setCompetition(competitionEntity);
+            toBeCreatedHuntingEntity.setNumberOfFish(huntingDTO.getNumberOfFish());
+        } else {
+            // Accumulate the total number of fish
+            int totalNumberOfFish = huntingDTO.getNumberOfFish();
+
+            for (HuntingEntity existingEntity : foundHuntingEntity) {
+                totalNumberOfFish += existingEntity.getNumberOfFish();
+            }
+
+            // Update the new entity with the total number of fish
+            toBeCreatedHuntingEntity.setId(huntingDTO.getId());
+            toBeCreatedHuntingEntity.setMember(memberEntity);
+            toBeCreatedHuntingEntity.setFish(fishEntity);
+            toBeCreatedHuntingEntity.setCompetition(competitionEntity);
+            toBeCreatedHuntingEntity.setNumberOfFish(totalNumberOfFish);
+        }
+
 
         HuntingEntity createdHuntingEntity = huntingRepository.save(toBeCreatedHuntingEntity);
+
+        setRanking(createdHuntingEntity.getId());
 
         return HuntingMapper.huntingMapper.toDTO(createdHuntingEntity);
 
@@ -108,6 +131,7 @@ public class HuntingService implements HuntingServiceInterface {
         toBeUpdateddHuntingEntity.setFish(fishEntity);
         toBeUpdateddHuntingEntity.setCompetition(competitionEntity);
         toBeUpdateddHuntingEntity.setNumberOfFish(huntingDTO.getNumberOfFish());
+
 
         HuntingEntity updateddHuntingEntity = huntingRepository.save(toBeUpdateddHuntingEntity);
 
@@ -237,10 +261,35 @@ public class HuntingService implements HuntingServiceInterface {
         return score;
     }
 
+    /**
+     * @description Set ranking
+     * @param hunting_id
+     * @return RankingDTO
+     */
     @Override
     public RankingDTO setRanking(Integer hunting_id) {
-        return null;
+        HuntingEntity huntingEntity = huntingRepository.findById(hunting_id).orElse(null);
+        List<RankingDTO> rankingDTOS = rankingService.getAllByCompetitionCode(huntingEntity.getCompetition().getCode());
+
+        if(huntingEntity == null){
+            log.info("Hunting not found");
+            return null;
+        }
+        Integer score = calculateScore(hunting_id);
+        RankingDTO rankingDTO = new RankingDTO();
+        rankingDTO.setCompetition(huntingEntity.getCompetition());
+        rankingDTO.setMember(huntingEntity.getMember());
+        rankingDTO.setScore(score);
+
+        rankingService.create(rankingDTO);
+
+        // To re sort all competition's rankings
+        rankingService.getAndSortRankingByCompetition(huntingEntity.getCompetition().getCode());
+
+
+        return rankingDTO;
     }
+
 
 
 }
