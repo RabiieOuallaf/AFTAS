@@ -202,5 +202,28 @@ public class RankingService implements RankingServiceInterface {
         return foundRankingDTOS;
     }
 
+    /**
+     * @Description get competition podium
+     * @param competition_code
+     * @return
+     */
+    @Override
+    public List<RankingDTO> getCompetitionPoduim(String competition_code) {
+        List<RankingDTO> foundRankingDTOS = getAndSortRankingByCompetition(competition_code);
+        if(foundRankingDTOS.isEmpty() || foundRankingDTOS == null) {
+            log.info("There's no ranking under the given competition code");
+            return null;
+        }
+        List<RankingDTO> competitionPodium = new ArrayList<>();
+        if(foundRankingDTOS.size() < 3) {
+            log.error("There's no enough members to make a podium");
+            return null;
+        }
+        competitionPodium.add(foundRankingDTOS.get(0));
+        competitionPodium.add(foundRankingDTOS.get(1));
+        competitionPodium.add(foundRankingDTOS.get(2));
+
+        return competitionPodium;
+    }
 
 }

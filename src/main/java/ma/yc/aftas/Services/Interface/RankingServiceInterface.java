@@ -13,4 +13,5 @@ public interface RankingServiceInterface {
     List<RankingDTO> getAllByCompetitionCode(String competition_code);
     List<RankingDTO> getAllByMemberNum(Integer member_num);
     List<RankingDTO> getAndSortRankingByCompetition(String competition_code);
+    List<RankingDTO> getCompetitionPoduim(String competition_code);
 }
